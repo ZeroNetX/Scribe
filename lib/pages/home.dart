@@ -1,47 +1,31 @@
 import '../imports.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    return Container(
+      // color: Colors.red,
+      child: Column(
+        children: [
+          ArticleList(
+            'Recent Articles',
+            zeroNetController.recentArticles,
+            zeroNetController.fetchRecentArticles,
+          ),
+          ArticleList(
+            'Most Likes Articles',
+            zeroNetController.mostLikedArticles,
+            customIndex: zeroNetController.articleVotesCount,
+            zeroNetController.fetchMostLikedArticles,
+          ),
+          ArticleList(
+            'Previous',
+            zeroNetController.allArticles,
+            zeroNetController.fetchAllArticles,
+          ),
+        ],
       ),
     );
   }

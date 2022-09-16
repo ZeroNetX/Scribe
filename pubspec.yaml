@@ -9,7 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: 1.0.5
+  get: 4.6.5
+  reading_time: ^2.0.0
+  timeago: ^3.3.0
+  zeronet_ws: 0.0.7
 
 dev_dependencies:
   flutter_test:
