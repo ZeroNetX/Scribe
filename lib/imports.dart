@@ -9,6 +9,7 @@ export 'package:zeronet_ws/zeronet_ws.dart';
 export 'package:zeronet_ws/extensions/futures.dart';
 
 export 'pages/home.dart';
+export 'pages/article.dart';
 export 'models/menu.dart';
 export 'models/article.dart';
 export 'widgets/app_bar.dart';

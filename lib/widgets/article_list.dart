@@ -18,10 +18,8 @@ class ArticleList extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          // color: Colors.blueAccent,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

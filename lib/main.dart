@@ -1,6 +1,3 @@
-import 'package:scribe/controllers/theme.dart';
-import 'package:scribe/pages/article.dart';
-
 import 'imports.dart';
 
 void main() {

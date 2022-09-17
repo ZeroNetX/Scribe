@@ -29,7 +29,7 @@ class ZeroNetController extends GetxController {
   }
 
   void fetchAllArticles() {
-    fetchArticles(kARTICLES_QUERY, addArticle);
+    fetchArticles(kARTICLESQUERY, addArticle);
   }
 
   void fetchArticles(String query, Function(Article article) adder) async {
@@ -101,7 +101,7 @@ ORDER BY votes DESC
 LIMIT ${themeController.likedArticles.value}
 """;
 
-const kARTICLES_QUERY = """
+const kARTICLESQUERY = """
 SELECT post.*,  COUNT(comment_id) AS comments,
 (SELECT COUNT(*) FROM post_vote WHERE post_vote.post_id = post.post_id) AS votes
 FROM post

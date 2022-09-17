@@ -1,4 +1,3 @@
-import '../controllers/theme.dart';
 import '../imports.dart';
 
 class AppBar extends StatelessWidget {
