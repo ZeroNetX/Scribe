@@ -30,13 +30,8 @@ class ArticleList extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                 ),
-              ),
-              const SizedBox(width: 30),
-              ElevatedButton(
-                onPressed: loader,
-                child: const Text("Refresh"),
               ),
             ],
           ).paddingSymmetric(vertical: 24),
@@ -48,14 +43,16 @@ class ArticleList extends StatelessWidget {
                 ? customIndex![a.id]!
                 : articles.indexOf(a) + 1;
 
-            articlesL.add(RecentArticle(idx, a));
+            articlesL.add(
+              RecentArticle(idx, a)
+                  .contained(color: Colors.green)
+                  .minSized(height: 67.0),
+            );
           }
           return Wrap(
             alignment: WrapAlignment.spaceBetween,
-            // runAlignment: WrapAlignment.center,
-            // spacing: 180,
-            // runAlignment: WrapAlignment.spaceEvenly,
-            // crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: themeController.runSpacing.value,
+            runSpacing: 20.0,
             children: articlesL,
           );
         })

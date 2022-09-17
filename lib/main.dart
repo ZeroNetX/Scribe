@@ -1,8 +1,14 @@
+import 'package:scribe/controllers/theme.dart';
+import 'package:scribe/pages/article.dart';
+
 import 'imports.dart';
 
 void main() {
   init();
-  runApp(const MyApp());
+  runApp(LayoutBuilder(builder: (ctx, cons) {
+    themeController.layoutChanged(cons.biggest);
+    return const MyApp();
+  }));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +28,9 @@ class MyApp extends StatelessWidget {
           case Menu.homePage:
             body = const HomePage();
             break;
+          case Menu.article:
+            body = ArticlePage(menuController.currentArticle.value!);
+            break;
           default:
             body = Container();
         }
@@ -34,9 +43,12 @@ class MyApp extends StatelessWidget {
                 const AppBar(),
                 Row(
                   children: [
-                    const Spacer(flex: 1),
-                    Flexible(flex: 16, child: body),
-                    const Spacer(flex: 1)
+                    Spacer(flex: themeController.pagePadding.value),
+                    Flexible(
+                      flex: themeController.bodyFlex.value,
+                      child: body,
+                    ),
+                    Spacer(flex: themeController.pagePadding.value)
                   ],
                 )
               ],

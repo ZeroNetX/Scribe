@@ -21,11 +21,11 @@ class ZeroNetController extends GetxController {
   final articleCommentsCount = <int, int>{}.obs;
 
   void fetchRecentArticles() {
-    fetchArticles(kRECENT_ARTICLES_QUERY, addRecentArticle);
+    fetchArticles(recentFetchQuery(), addRecentArticle);
   }
 
   void fetchMostLikedArticles() {
-    fetchArticles(kMOST_LIKED_QUERY, addMostLikedArticle);
+    fetchArticles(mostLikedQuery(), addMostLikedArticle);
   }
 
   void fetchAllArticles() {
@@ -81,24 +81,24 @@ class ZeroNetController extends GetxController {
   }
 }
 
-const kRECENT_ARTICLES_QUERY = """
+String recentFetchQuery() => """
 SELECT post.*,  COUNT(comment_id) AS comments,
 (SELECT COUNT(*) FROM post_vote WHERE post_vote.post_id = post.post_id) AS votes
 FROM post
 LEFT JOIN comment USING (post_id)
 GROUP BY post_id
 ORDER BY date_published DESC
-LIMIT 2
+LIMIT ${themeController.recentArticles.value}
 """;
 
-const kMOST_LIKED_QUERY = """
+String mostLikedQuery() => """
 SELECT post.*,  COUNT(comment_id) AS comments,
 (SELECT COUNT(*) FROM post_vote WHERE post_vote.post_id = post.post_id) AS votes
 FROM post
 LEFT JOIN comment USING (post_id)
 GROUP BY post_id
 ORDER BY votes DESC
-LIMIT 4
+LIMIT ${themeController.likedArticles.value}
 """;
 
 const kARTICLES_QUERY = """

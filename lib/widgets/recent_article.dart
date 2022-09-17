@@ -13,44 +13,57 @@ class RecentArticle extends StatelessWidget {
   Widget build(BuildContext context) {
     final readingTimeStr = readingTime(article.body).minutes.ceil().toString();
     final timeAgo = format(article.dateTime);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          index < 10 ? '0$index' : '$index',
-          style: const TextStyle(
-            fontSize: 36.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey,
-          ),
-        ).paddingOnly(right: 16),
-        Column(
+    return Obx(() {
+      return SizedBox(
+        width: themeController.articleListWidgetWidth.value,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 340,
-              child: Text(
-                article.title,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+            Text(
+              index < 10 ? '0$index' : '$index',
+              style: const TextStyle(
+                fontSize: 36.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
               ),
-            ),
-            const SizedBox(height: 8.0),
-            Row(
+            ).contained(color: Colors.brown).paddingOnly(right: 16),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('$readingTimeStr mins'),
-                const SizedBox(width: 12.0),
-                Text(timeAgo),
+                SizedBox(
+                  width: themeController.articleListWidgetWidth.value * 0.75,
+                  child: InkWell(
+                    onTap: () {
+                      menuController.setCurrentArticle(article);
+                      menuController.goto(Menu.article);
+                    },
+                    child: Text(
+                      article.title,
+                      maxLines: 2,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ).contained(color: Colors.amber),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text('$readingTimeStr mins'),
+                    const SizedBox(width: 12.0),
+                    Text(timeAgo),
+                  ],
+                )
               ],
-            )
+            ).contained(color: Colors.red),
           ],
         ),
-      ],
-    ).paddingOnly(right: 20, bottom: 24);
+      );
+    });
   }
 }

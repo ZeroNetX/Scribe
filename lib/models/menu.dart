@@ -1,3 +1,4 @@
 enum Menu {
   homePage,
+  article,
 }

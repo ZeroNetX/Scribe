@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_markdown: ^0.6.12
   get: 4.6.5
   reading_time: ^2.0.0
   timeago: ^3.3.0
