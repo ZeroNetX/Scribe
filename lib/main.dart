@@ -1,7 +1,6 @@
 import 'imports.dart';
 
 void main() async {
-  await znxController.init();
   runApp(const MyApp());
 }
 
@@ -15,6 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.robotoTextTheme(),
       ),
       home: const MyHomePage(title: 'Sample ZeroNet Site'),
     );

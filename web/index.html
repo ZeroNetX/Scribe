@@ -26,13 +26,14 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
   <script type="text/javascript" src="js/ZeroFrame.js"></script>
+  <script type="text/javascript" src="js/bindings.js"></script>
 </head>
 
 <body>
   <script>
-    var zeroFrame = new ZeroFrame();
-    zeroFrame.monkeyPatchAjax();
-    zeroFrame.cmd("siteInfo", [], function () {
+    var frame = new ZeroFrame();
+    frame.monkeyPatchAjax();
+    frame.cmd("siteInfo", [], function () {
       var script = document.createElement("script");
       script.src = "assets/fonts/MaterialIcons-Regular.otf";
       script.type = "application/octet-stream";

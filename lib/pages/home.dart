@@ -1,5 +1,3 @@
-import 'package:scribe/controllers/home.dart';
-
 import '../imports.dart';
 
 class MyHomePage extends StatelessWidget {

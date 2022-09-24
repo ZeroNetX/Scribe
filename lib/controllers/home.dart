@@ -9,13 +9,7 @@ class HomeController extends GetxController {
   final infoStr = ''.obs;
 
   void loadSiteInfo() async {
-    print("Fetching SiteInfo");
-    printError(info: "Fetching SiteInfo");
-    final res = (await znxController.siteInfo()).result;
-    printError(info: "Got SiteInfo");
-    final info = SiteInfo.fromJson(res);
-    print("Fetched SiteInfo");
-    printError(info: "Fetched SiteInfo");
+    final info = await znxController.siteInfo();
     infoStr.value = 'Site Address: ${info.address!}';
     infoStr.value += '\nPeers: ${info.peers}';
     infoStr.value += '\nModified: ${info.settings!.modified}';
