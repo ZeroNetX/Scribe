@@ -125,7 +125,8 @@ class MyApp extends StatelessWidget {
                                               .toString()
                                           : '0',
                                       style: const TextStyle(
-                                          color: Colors.black45),
+                                        color: Colors.black45,
+                                      ),
                                     ),
                                   ],
                                 );
@@ -139,8 +140,7 @@ class MyApp extends StatelessWidget {
                                 children: [
                                   IconButton(
                                     onPressed: () {
-                                      menuController.showCommentBox.value =
-                                          !menuController.showCommentBox.value;
+                                      //TODO: request current article's comment focus
                                     },
                                     icon: const Icon(Icons.messenger),
                                   ),

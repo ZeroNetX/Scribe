@@ -47,16 +47,33 @@ class ZeroNetController extends GetxController {
         final param = event[1];
 
         if (name == 'file_done') {
-          var path = param.toString();
+          final path = param.toString();
 
-          var pattern = 'data/users/';
+          const dataPattern = 'data/data.json';
+          const pattern = 'data/users/';
 
-          if (path.startsWith('${pattern}1') && path.endsWith('.json')) {
+          if (path.startsWith(dataPattern)) {
+            zeroNetController.fetchAllArticles();
+            zeroNetController.fetchRecentArticles();
+          } else if (path.startsWith('${pattern}1') && path.endsWith('.json')) {
             debugPrint('User Data Changed');
             final userFile = path.replaceFirst(pattern, '');
             final dataOrContentJsonFile =
                 userFile.replaceFirst(RegExp(r'1\w+'), '');
-            if (dataOrContentJsonFile == "/data.json") {}
+            if (dataOrContentJsonFile == "/data.json") {
+              final currentUserAddr =
+                  zeroNetController.siteInfo.value?.authAddress;
+              String? currentUserDir;
+
+              if (currentUserAddr != null) {
+                currentUserDir = 'data/users/$currentUserAddr';
+              }
+              if (currentUserDir != null && path.startsWith(currentUserDir)) {
+                zeroNetController.fetchMostLikedArticles();
+              } else {
+                reload();
+              }
+            }
           }
         } else if (name == 'cert_changed') {
           loadSiteInfo();
@@ -234,5 +251,18 @@ class ZeroNetController extends GetxController {
       sign: true,
       update_changed_files: true,
     );
+  }
+
+  Future reload() async {
+    if (menuController.currentRoute.value == Menu.article) {
+      int postId = menuController.currentArticle.value!.id;
+      var res = await ZeroNet.instance.dbQueryFuture(postWithID(postId));
+      if (res.isMsg) {
+        Article a = Article.fromJson(res.message!.result[0]);
+        menuController.currentArticle.value = a;
+        commentsList.clear();
+        await loadComments(postId);
+      }
+    }
   }
 }
