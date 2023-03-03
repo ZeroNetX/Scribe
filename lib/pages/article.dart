@@ -60,18 +60,27 @@ class ArticlePage extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: RichText(
-                        text: TextSpan(
-                          style: const TextStyle(color: Colors.black),
-                          children: [
-                            TextSpan(
-                              text: zeroNetController
-                                      .siteInfo.value!.certUserId ??
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              showZeroNetxDialog(context, () {});
+                            },
+                            child: Text(
+                              zeroNetController.siteInfo.value!.certUserId ??
                                   'UnknowUser',
+                              style: TextStyle(
+                                color: Colors.orange.shade900,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                            const TextSpan(text: '--New comment')
-                          ],
-                        ),
+                          ),
+                          const Text(
+                            '--New comment',
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
                       ),
                     ),
                     Container(
@@ -117,28 +126,32 @@ class ArticlePage extends StatelessWidget {
                       absorbing:
                           zeroNetController.siteInfo.value!.certUserId == null,
                       child: ElevatedButton(
-                        onPressed: () {
-                          if (zeroNetController.siteInfo.value!.certUserId !=
-                              null) {
-                            zeroNetController.addComment(
-                              Comment(
-                                body: commentCtrl.text,
-                                dateAdded:
-                                    DateTime.now().millisecondsSinceEpoch ~/
-                                        1000,
-                                commentId:
-                                    menuController.currentArticle.value!.id,
-                                commentVotes: 0,
-                                directory: '',
-                                jsonId: 0,
-                                userId: zeroNetController
-                                        .siteInfo.value!.certUserId ??
-                                    "",
-                              ),
-                            );
-                            commentCtrl.clear();
-                          }
-                        },
+                        onPressed: commentCtrl.text.isEmpty
+                            ? null
+                            : () {
+                                if (zeroNetController
+                                        .siteInfo.value!.certUserId !=
+                                    null) {
+                                  final epoch =
+                                      DateTime.now().millisecondsSinceEpoch ~/
+                                          1000;
+                                  final commentId =
+                                      menuController.currentArticle.value!.id;
+                                  final certUserId2 = zeroNetController
+                                      .siteInfo.value!.certUserId;
+                                  final comment = Comment(
+                                    body: commentCtrl.text,
+                                    dateAdded: epoch,
+                                    commentId: commentId,
+                                    commentVotes: 0,
+                                    directory: '',
+                                    jsonId: 0,
+                                    userId: certUserId2 ?? "",
+                                  );
+                                  zeroNetController.addComment(comment);
+                                  commentCtrl.clear();
+                                }
+                              },
                         style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(
                             Colors.amber,
