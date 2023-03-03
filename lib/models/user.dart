@@ -16,7 +16,7 @@ class User {
       nextCommentId: map["next_comment_id"],
       comments: map["comment"],
       commentVotes: map["comment_vote"],
-      postVotes: map["topic_vote"],
+      postVotes: map["post_vote"],
     );
   }
 
@@ -25,7 +25,7 @@ class User {
       "next_comment_id": nextCommentId,
       "comment": comments,
       "comment_vote": commentVotes,
-      "topic_vote": postVotes
+      "post_vote": postVotes
     };
   }
 }
