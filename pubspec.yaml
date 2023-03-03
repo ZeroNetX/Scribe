@@ -11,9 +11,13 @@ dependencies:
     sdk: flutter
   flutter_markdown: ^0.6.12
   get: 4.6.5
+  intl: ^0.18.0
   reading_time: ^2.0.0
   timeago: ^3.3.0
-  zeronet_ws: 0.0.7
+  zeronet_ws:
+    git:
+      url: https://github.com/ZeroNetX/zeronet_ws.git
+      ref: 92e6763997149be0ca4ea01734c8969927e4df21
 
 dev_dependencies:
   flutter_test:

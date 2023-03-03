@@ -49,4 +49,41 @@ class ThemeController extends GetxController {
       initFetch();
     }
   }
+
+  MarkdownStyleSheet getMarkdownStyleSheet() {
+    const borderSide = BorderSide(color: Colors.transparent, width: 2);
+    Color markdownColor = Colors.amber;
+    return MarkdownStyleSheet().copyWith(
+      a: TextStyle(color: Colors.orange.shade900),
+      horizontalRuleDecoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            width: 2.0,
+            color: Colors.amber.shade200,
+          ),
+        ),
+      ),
+      blockquotePadding:
+          const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      blockquoteDecoration: BoxDecoration(
+        color: Colors.amber.shade100,
+        border: Border(
+          left: BorderSide(
+            color: markdownColor,
+            width: 2,
+          ),
+          right: borderSide,
+          bottom: borderSide,
+          top: borderSide,
+        ),
+      ),
+      codeblockDecoration: BoxDecoration(
+        color: markdownColor.withAlpha(10),
+      ),
+      code: const TextStyle(
+        backgroundColor: Colors.transparent,
+        fontWeight: FontWeight.w500,
+      ),
+    );
+  }
 }
