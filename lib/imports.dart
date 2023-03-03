@@ -24,6 +24,7 @@ export 'widgets/app_bar.dart';
 export 'widgets/recent_article.dart';
 export 'widgets/article_list.dart';
 export 'widgets/sign_in_dialog.dart';
+export 'controllers/consts.dart';
 export 'controllers/menu.dart';
 export 'controllers/theme.dart';
 export 'controllers/extensions.dart';
