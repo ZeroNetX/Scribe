@@ -52,156 +52,158 @@ class ArticlePage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Obx(
-            () {
-              return Stack(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: RichText(
-                          text: TextSpan(
-                            style: const TextStyle(color: Colors.black),
-                            children: [
-                              TextSpan(
-                                text: zeroNetController
-                                        .siteInfo.value!.certUserId ??
-                                    'UnknowUser',
-                              ),
-                              const TextSpan(text: '--New comment')
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 2,
-                            color: Colors.black,
-                          ),
-                        ),
-                        child: AbsorbPointer(
-                          absorbing:
-                              zeroNetController.siteInfo.value!.certUserId ==
-                                  null,
-                          child: TextFormField(
-                            controller: commentCtrl,
-                            focusNode: commentFocusNode,
-                            keyboardType: TextInputType.multiline,
-                            minLines: 1,
-                            maxLines: 15,
-                            validator: (value) {
-                              if (value != null) {
-                                if (value.isNotEmpty) {
-                                  return null;
-                                }
-                              }
-                              return "Enter comment";
-                            },
-                            style: const TextStyle(color: Colors.black),
-                            cursorColor: Colors.black,
-                            decoration: const InputDecoration(
-                              fillColor: Colors.transparent,
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
+          Obx(() {
+            return Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(color: Colors.black),
+                          children: [
+                            TextSpan(
+                              text: zeroNetController
+                                      .siteInfo.value!.certUserId ??
+                                  'UnknowUser',
                             ),
-                          ),
+                            const TextSpan(text: '--New comment')
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 2,
+                          color: Colors.black,
+                        ),
                       ),
-                      AbsorbPointer(
+                      child: AbsorbPointer(
                         absorbing:
                             zeroNetController.siteInfo.value!.certUserId ==
                                 null,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (zeroNetController.siteInfo.value!.certUserId !=
-                                null) {
-                              zeroNetController.addComment(
-                                Comment(
-                                  body: commentCtrl.text,
-                                  dateAdded:
-                                      DateTime.now().millisecondsSinceEpoch ~/
-                                          1000,
-                                  commentId:
-                                      menuController.currentArticle.value!.id,
-                                  commentVotes: 0,
-                                  directory: '',
-                                  jsonId: 0,
-                                  userId: zeroNetController
-                                          .siteInfo.value!.certUserId ??
-                                      "",
-                                ),
-                              );
-                              commentCtrl.clear();
+                        child: TextFormField(
+                          controller: commentCtrl,
+                          focusNode: commentFocusNode,
+                          keyboardType: TextInputType.multiline,
+                          minLines: 1,
+                          maxLines: 15,
+                          validator: (value) {
+                            if (value != null) {
+                              if (value.isNotEmpty) {
+                                return null;
+                              }
                             }
+                            return "Enter comment";
                           },
-                          style: const ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll<Color>(
-                                  Colors.amber)),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 8),
-                            child: Text(
-                              "Submit Comment",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 10,
-                              ),
+                          style: const TextStyle(color: Colors.black),
+                          cursorColor: Colors.black,
+                          decoration: const InputDecoration(
+                            fillColor: Colors.transparent,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  zeroNetController.siteInfo.value!.certUserId == null
-                      ? Positioned(
-                          bottom: 0,
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                            child: const SizedBox(
-                              width: double.maxFinite,
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
-                  zeroNetController.siteInfo.value!.certUserId == null
-                      ? Align(
-                          alignment: Alignment.center,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 35),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                showZeroNetxDialog(context, () {});
-                              },
-                              child: const Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Text("Sign In"),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    AbsorbPointer(
+                      absorbing:
+                          zeroNetController.siteInfo.value!.certUserId == null,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (zeroNetController.siteInfo.value!.certUserId !=
+                              null) {
+                            zeroNetController.addComment(
+                              Comment(
+                                body: commentCtrl.text,
+                                dateAdded:
+                                    DateTime.now().millisecondsSinceEpoch ~/
+                                        1000,
+                                commentId:
+                                    menuController.currentArticle.value!.id,
+                                commentVotes: 0,
+                                directory: '',
+                                jsonId: 0,
+                                userId: zeroNetController
+                                        .siteInfo.value!.certUserId ??
+                                    "",
                               ),
+                            );
+                            commentCtrl.clear();
+                          }
+                        },
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll<Color>(
+                            Colors.amber,
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 8,
+                          ),
+                          child: Text(
+                            "Submit Comment",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10,
                             ),
                           ),
-                        )
-                      : const SizedBox()
-                ],
-              );
-            },
-          ),
-
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                zeroNetController.siteInfo.value!.certUserId == null
+                    ? Positioned(
+                        bottom: 0,
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                          child: const SizedBox(width: double.maxFinite),
+                        ),
+                      )
+                    : const SizedBox(),
+                zeroNetController.siteInfo.value!.certUserId == null
+                    ? Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 35),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showZeroNetxDialog(context, () {});
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Text("Sign In"),
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox()
+              ],
+            );
+          }),
           const SizedBox(
             height: 20,
           ),
-
           for (var obj in commentsList)
-            CommentItem(
-              obj: obj,
-              commentCtrl: commentCtrl,
-              commentFocusNode: commentFocusNode,
+            Column(
+              children: [
+                const Divider(color: Colors.black12),
+                CommentItem(
+                  obj: obj,
+                  commentCtrl: commentCtrl,
+                  commentFocusNode: commentFocusNode,
+                ),
+              ],
             )
         ],
       );
@@ -238,62 +240,77 @@ class CommentItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(
-              color: Colors.black12,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                      style: const TextStyle(color: Colors.black),
-                      children: [
-                        TextSpan(
-                          text: obj.userId,
-                          style: TextStyle(
-                            color: Colors.orange.shade900,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        TextSpan(
-                          text:
-                              ' --on ${DateFormat('MMM d, y').format(DateTime.fromMillisecondsSinceEpoch(obj.dateAdded * 1000))}',
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                CommentReplyButton(
-                  key: replyButtonKey,
-                  callBack: () {
-                    commentCtrl.clear();
-                    commentCtrl.text = "> ${[
-                      obj.userId
-                    ]}(#comment_${obj.commentId}_${obj.directory.split('/').last}):${obj.body}\n";
-                    commentFocusNode.requestFocus();
-                  },
-                ),
-              ],
+            CommentHeader(
+              obj: obj,
+              replyButtonKey: replyButtonKey,
+              commentCtrl: commentCtrl,
+              commentFocusNode: commentFocusNode,
             ),
             MarkdownBody(
-                    imageBuilder: (uri, title, alt) {
-                      return Container(
-                        height: 10,
-                        width: 200,
-                        color: Colors.amber,
-                      );
-                    },
-                    data: obj.body,
-                    shrinkWrap: true,
-                    styleSheet: themeController.getMarkdownStyleSheet())
-                .paddingSymmetric(vertical: 20),
+              data: obj.body,
+              shrinkWrap: true,
+              styleSheet: themeController.getMarkdownStyleSheet(),
+            ).paddingSymmetric(vertical: 20),
           ],
         ),
       ),
+    );
+  }
+}
+
+class CommentHeader extends StatelessWidget {
+  const CommentHeader({
+    super.key,
+    required this.obj,
+    required this.replyButtonKey,
+    required this.commentCtrl,
+    required this.commentFocusNode,
+  });
+
+  final Comment obj;
+  final GlobalObjectKey<CommentReplyButtonState> replyButtonKey;
+  final TextEditingController commentCtrl;
+  final FocusNode commentFocusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: RichText(
+            textAlign: TextAlign.start,
+            text: TextSpan(
+              style: const TextStyle(color: Colors.black),
+              children: [
+                TextSpan(
+                  text: obj.userId,
+                  style: TextStyle(
+                    color: Colors.orange.shade900,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                TextSpan(
+                  text:
+                      ' --on ${DateFormat('MMM d, y').format(DateTime.fromMillisecondsSinceEpoch(obj.dateAdded * 1000))}',
+                )
+              ],
+            ),
+          ),
+        ),
+        CommentReplyButton(
+          key: replyButtonKey,
+          callBack: () {
+            commentCtrl.clear();
+            commentCtrl.text = "> ${[
+              obj.userId
+            ]}(#comment_${obj.commentId}_${obj.directory.split('/').last}):${obj.body}\n";
+            commentFocusNode.requestFocus();
+          },
+        ),
+      ],
     );
   }
 }
