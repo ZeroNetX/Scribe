@@ -79,15 +79,19 @@ class MyApp extends StatelessWidget {
                                         if (zeroNetController
                                                 .siteInfo.value!.certUserId !=
                                             null) {
-                                          zeroNetController
-                                                  .userObject.postVotes[
+                                          var id = menuController
+                                              .currentArticle.value!.id;
+
+                                          if (!zeroNetController
+                                              .userObject.postVotes
+                                              .containsKey("$id")) {
+                                            zeroNetController.userObject
+                                                .postVotes["$id"] = 1;
+                                            zeroNetController.likeArticle(
                                               menuController
-                                                  .currentArticle.value!.id
-                                                  .toString()] = 1;
-                                          zeroNetController.likeArticle(
-                                            menuController
-                                                .currentArticle.value!.id,
-                                          );
+                                                  .currentArticle.value!.id,
+                                            );
+                                          }
                                         } else {
                                           showZeroNetxDialog(
                                             context,
