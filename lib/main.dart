@@ -1,5 +1,10 @@
 import 'imports.dart';
 
+const kSiteAddr = String.fromEnvironment(
+  'SITE_ADDR',
+  defaultValue: "1SCribeHs1nz8m3vXipP84oyXUy4nf2ZD",
+);
+
 void main() async {
   await init();
   runApp(

@@ -28,3 +28,4 @@ export 'controllers/menu.dart';
 export 'controllers/theme.dart';
 export 'controllers/extensions.dart';
 export 'controllers/zeronet.dart';
+export 'main.dart';

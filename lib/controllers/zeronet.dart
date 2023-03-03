@@ -3,8 +3,10 @@ import '../imports.dart';
 final zeroNetController = ZeroNetController();
 
 Future<void> init() async {
-  await ZeroNet.instance.connect("1SCribeHs1nz8m3vXipP84oyXUy4nf2ZD",
-      onEventMessage: zeroNetController.onMessage);
+  await ZeroNet.instance.connect(
+    kSiteAddr,
+    onEventMessage: zeroNetController.onMessage,
+  );
   await ZeroNet.instance.channelJoinFuture(['siteChanged']);
   await zeroNetController.loadSiteInfo();
 

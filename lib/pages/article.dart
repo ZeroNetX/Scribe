@@ -32,8 +32,7 @@ class ArticlePage extends StatelessWidget {
             imageBuilder: (uri, title, alt) {
               if (uri.path.startsWith('data/')) {
                 return Image(
-                  image: NetworkImage(
-                      "http://127.0.0.1:43110/1SCribeHs1nz8m3vXipP84oyXUy4nf2ZD/$uri"),
+                  image: NetworkImage("http://127.0.0.1:43110/$kSiteAddr/$uri"),
                 );
               } else {
                 return const SizedBox();
