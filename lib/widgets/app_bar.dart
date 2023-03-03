@@ -33,32 +33,7 @@ class AppBar extends StatelessWidget {
                       ),
                     ),
                   ),
-                  zeroNetController.siteInfo.value!.certUserId != null
-                      ? GestureDetector(
-                          onTap: () => showZeroNetxDialog(context, () {}),
-                          child: CircleAvatar(
-                            radius: 20,
-                            child: Text(
-                              zeroNetController.siteInfo.value!.certUserId!
-                                  .split('@')
-                                  .first[0]
-                                  .toUpperCase(),
-                            ),
-                          ),
-                        )
-                      : ElevatedButton(
-                          onPressed: () {
-                            showZeroNetxDialog(context, () {});
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF2F2109),
-                            ),
-                            minimumSize:
-                                MaterialStateProperty.all(const Size(90, 45)),
-                          ),
-                          child: const Text("Sign In"),
-                        ),
+                  const UserProfileWidget(),
                 ],
               ),
             ),
@@ -66,6 +41,41 @@ class AppBar extends StatelessWidget {
           ],
         ),
       );
+    });
+  }
+}
+
+class UserProfileWidget extends StatelessWidget {
+  const UserProfileWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      return zeroNetController.siteInfo.value!.certUserId != null
+          ? GestureDetector(
+              onTap: () => showZeroNetxDialog(context, () {}),
+              child: CircleAvatar(
+                radius: 20,
+                child: Text(
+                  zeroNetController.siteInfo.value!.certUserId!
+                      .split('@')
+                      .first[0]
+                      .toUpperCase(),
+                ),
+              ),
+            )
+          : ElevatedButton(
+              onPressed: () {
+                showZeroNetxDialog(context, () {});
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  const Color(0xFF2F2109),
+                ),
+                minimumSize: MaterialStateProperty.all(const Size(90, 45)),
+              ),
+              child: const Text("Sign In"),
+            );
     });
   }
 }
