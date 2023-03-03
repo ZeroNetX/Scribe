@@ -167,24 +167,29 @@ class MyApp extends StatelessWidget {
                   })
                 : const SizedBox();
           }),
-          body: SingleChildScrollView(
-            //controller: ScrollController(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const AppBar(),
-                Row(
-                  children: [
-                    Spacer(flex: themeController.pagePadding.value),
-                    Flexible(
-                      flex: themeController.bodyFlex.value,
-                      child: body,
-                    ),
-                    Spacer(flex: themeController.pagePadding.value)
-                  ],
-                )
-              ],
+          body: RefreshIndicator(
+            onRefresh: () async {
+              await zeroNetController.reload();
+            },
+            child: SingleChildScrollView(
+              //controller: ScrollController(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AppBar(),
+                  Row(
+                    children: [
+                      Spacer(flex: themeController.pagePadding.value),
+                      Flexible(
+                        flex: themeController.bodyFlex.value,
+                        child: body,
+                      ),
+                      Spacer(flex: themeController.pagePadding.value)
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         );
