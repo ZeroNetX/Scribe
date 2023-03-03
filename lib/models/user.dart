@@ -16,7 +16,7 @@ class User {
       nextCommentId: map["next_comment_id"],
       comments: map["comment"],
       commentVotes: map["comment_vote"],
-      postVotes: map["post_vote"],
+      postVotes: map["post_vote"] ?? {},
     );
   }
 
